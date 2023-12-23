@@ -3,15 +3,22 @@ require("dotenv").config();
 require("./helpers/check-env")(["CLIENT_ID", "CLIENT_TOKEN", "MONGO_URI"]);
 
 //packages
-const { Client, GatewayIntentBits, Collection } = require("discord.js"),
+const {
+        Client,
+        GatewayIntentBits,
+        Collection,
+        Partials,
+    } = require("discord.js"),
     mongoose = require("mongoose");
 
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
     ],
+    partials: [Partials.GuildMember],
 });
 
 require("./helpers/log")(client);
