@@ -3,8 +3,6 @@ require("dotenv").config();
 require("./helpers/check-env")(["CLIENT_ID", "CLIENT_TOKEN", "MONGO_URI"]);
 
 //packages
-const fs = require("fs"),
-    path = require("path");
 const { Client, GatewayIntentBits, Collection } = require("discord.js"),
     mongoose = require("mongoose");
 
