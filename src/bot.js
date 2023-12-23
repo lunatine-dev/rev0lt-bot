@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-require("./helpers/check-env")(["CLIENT_TOKEN", "MONGO_URI"]);
+require("./helpers/check-env")(["CLIENT_ID", "CLIENT_TOKEN", "MONGO_URI"]);
 
 //packages
 const fs = require("fs"),
