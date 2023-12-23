@@ -3,15 +3,15 @@ module.exports = (variables) => {
 
     for (const variable of variables) {
         if (!process.env[variable]) {
-            missing.push(variables);
+            missing.push(variable);
         }
     }
 
     if (missing.length) {
         console.log(
-            `Missing envrionment variable${
+            `Missing ${missing.length} envrionment variable${
                 missing.length > 1 ? "s" : ""
-            } (${missing})`
+            } (${missing.join(", ")})`
         );
 
         process.exit(1);
