@@ -8,6 +8,7 @@ dotenv.config();
 const client_id = process.env.CLIENT_ID;
 const token = process.env.CLIENT_TOKEN;
 const dev_guild = process.env.DEV_GUILD;
+const active_guild = process.env.ACTIVE_GUILD_ID;
 
 const globalCommands = [];
 const guilds = {};
@@ -27,7 +28,8 @@ for (const category of fs.readdirSync(commandsPath)) {
                 if (!guilds[dev_guild]) guilds[dev_guild] = [];
                 guilds[dev_guild].push(command.data.toJSON());
             } else {
-                globalCommands.push(command.data.toJSON());
+                // globalCommands.push(command.data.toJSON());
+                guilds[active_guild].push(command.data.toJSON());
             }
         }
     }

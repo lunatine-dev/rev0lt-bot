@@ -1,7 +1,7 @@
 const chalk = require("chalk");
 
 module.exports = (client) => {
-    client.log = (message, color = "white") => {
+    client.log = (message, color = "magenta") => {
         if (process.env?.NODE_ENV === "production") return; //skip if production
 
         let time = new Date().toLocaleTimeString();
