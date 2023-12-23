@@ -1,7 +1,9 @@
 const { AuditLogEvent } = require("discord.js");
 const User = require("../models/User");
 
-module.exports = async (client, auditLog) => {
+module.exports = async (client, auditLog, guild) => {
+    if (guild.id !== process.env.ACTIVE_GUILD_ID) return;
+
     const { action, targetId } = auditLog;
 
     // Check only for kicked users.
