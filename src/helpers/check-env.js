@@ -9,7 +9,9 @@ module.exports = (variables) => {
 
     if (missing.length) {
         console.log(
-            `Missing envrionment variable${missing.length > 1 ? "s" : ""}`
+            `Missing envrionment variable${
+                missing.length > 1 ? "s" : ""
+            } (${missing})`
         );
 
         process.exit(1);
