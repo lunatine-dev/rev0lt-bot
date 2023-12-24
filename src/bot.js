@@ -34,7 +34,7 @@ require("./helpers/load")(client);
     client.log("Connected to database", "green");
 
     client.log("Deploying commands", "red");
-    await require("./deploy");
+    await require("./deploy")();
     client.log("Deployed commands", "green");
 
     client.login(process.env.CLIENT_TOKEN);
