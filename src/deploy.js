@@ -29,6 +29,7 @@ for (const category of fs.readdirSync(commandsPath)) {
                 guilds[dev_guild].push(command.data.toJSON());
             } else {
                 // globalCommands.push(command.data.toJSON());
+                if (!guilds[active_guild]) guilds[active_guild] = [];
                 guilds[active_guild].push(command.data.toJSON());
             }
         }
