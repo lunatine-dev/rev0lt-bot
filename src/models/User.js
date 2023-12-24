@@ -18,6 +18,10 @@ const schema = new mongoose.Schema({
         default: 0,
         min: 0,
     },
+    role: {
+        type: String,
+        default: "user",
+    },
 });
 
 module.exports = mongoose.model("User", schema);
