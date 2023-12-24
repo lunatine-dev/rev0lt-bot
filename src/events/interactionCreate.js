@@ -18,21 +18,26 @@ module.exports = async (client, interaction) => {
         if (command.hasField) {
             let { key, value } = command.hasField;
 
-            let err;
-
-            if (!key || !value) err = true;
-
-            const user = await User.findOne({
-                identifier: interaction.user.id,
-            });
-
-            if (!user) err = true;
-
-            if (err)
+            if (!key || !value)
                 return interaction.reply({
                     content: "Permission error",
                     ephemeral: true,
                 });
+
+            let user = await User.findOne({
+                identifier: interaction.user.id,
+            });
+
+            if (!user) {
+                user = await new User({
+                    identifier: interaction.user.id,
+                    username: interaction.user.username,
+                    avatar: interaction.user.avatarURL({
+                        size: 256,
+                    }),
+                    points: 0,
+                }).save();
+            }
 
             if (!user[key] || user[key] !== value)
                 return interaction.reply({
