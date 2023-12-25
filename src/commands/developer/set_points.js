@@ -3,7 +3,7 @@ const User = require("../../models/User");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("points")
+        .setName("set_points")
         .setDescription("Sets a users points")
         .addUserOption((option) =>
             option
@@ -18,8 +18,7 @@ module.exports = {
                 .setMinValue(0)
                 .setRequired(true)
         ),
-    delay: {
-        has: true,
+    defer: {
         ephemeral: true,
     },
     async execute(interaction) {

@@ -54,9 +54,9 @@ module.exports = async (client, interaction) => {
                 });
         }
 
-        if (command.delay?.has) {
+        if (command.defer) {
             await interaction.deferReply({
-                ephemeral: command.delay?.ephemeral,
+                ephemeral: command.defer?.ephemeral,
             });
         }
 
