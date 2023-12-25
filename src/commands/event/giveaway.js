@@ -10,7 +10,7 @@ const Giveaway = require("../../models/Giveaway");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("giveaway")
-        .setDescription("Command not implemented")
+        .setDescription("Setup a giveaway")
         .addStringOption((option) =>
             option
                 .setName("description")
