@@ -50,6 +50,11 @@ module.exports = (client) => {
         //let's update giveaway, set it to inactive and set the winner and post the winner
 
         try {
+            await User.findByIdAndUpdate(winner._id, {
+                $set: {
+                    points: 0,
+                },
+            });
             await Giveaway.findByIdAndUpdate(_id, {
                 $set: {
                     active: false,
