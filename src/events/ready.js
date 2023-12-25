@@ -2,6 +2,7 @@ const { PermissionsBitField } = require("discord.js");
 
 module.exports = async (client) => {
     client.log("Bot is now ready", "green");
+    client.isLoggedIn = true;
 
     const guild = await client.guilds.fetch(process.env.ACTIVE_GUILD_ID);
 

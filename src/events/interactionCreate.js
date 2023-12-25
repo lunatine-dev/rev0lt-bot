@@ -46,12 +46,18 @@ module.exports = async (client, interaction) => {
                 });
         }
 
-        if (command.dev) {
+        if (command.dev || command.category === "developer") {
             if (process.env?.DEVELOPER_ID !== interaction.user.id)
                 return interaction.reply({
                     content: "This command is only available to developers.",
                     ephemeral: true,
                 });
+        }
+
+        if (command.delay?.has) {
+            await interaction.deferReply({
+                ephemeral: command.delay?.ephemeral,
+            });
         }
 
         await command.execute(interaction);

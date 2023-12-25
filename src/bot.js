@@ -1,6 +1,11 @@
 require("dotenv").config();
 
-require("./helpers/check-env")(["CLIENT_ID", "CLIENT_TOKEN", "MONGO_URI"]);
+require("./helpers/check-env")([
+    "CLIENT_ID",
+    "CLIENT_TOKEN",
+    "MONGO_URI",
+    "GIVEAWAY_CHANNEL",
+]);
 
 //packages
 const {
@@ -25,6 +30,7 @@ const client = new Client({
 require("./helpers/log")(client);
 
 client.commands = new Collection();
+client.isLoggedIn = false;
 
 require("./helpers/load")(client);
 
@@ -39,3 +45,19 @@ require("./helpers/load")(client);
 
     client.login(process.env.CLIENT_TOKEN);
 })();
+
+const cron = require("node-cron");
+
+cron.schedule("* * * * *", async () => {
+    if (!client.isLoggedIn) return;
+
+    try {
+        const expiredGiveaways = await client.getExpiredGiveaways();
+
+        for (const giveaway of expiredGiveaways) {
+            await client.processGiveaway(giveaway);
+        }
+    } catch (e) {
+        console.error(e);
+    }
+});
