@@ -10,6 +10,9 @@ const schema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    displayName: {
+        type: String,
+    },
     avatar: {
         type: String,
     },
