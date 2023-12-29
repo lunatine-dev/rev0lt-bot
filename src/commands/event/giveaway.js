@@ -27,11 +27,10 @@ module.exports = {
         key: "role",
         value: "admin",
     },
+    defer: {
+        ephemeral: true,
+    },
     async execute(interaction) {
-        await interaction.deferReply({
-            ephemeral: true,
-        });
-
         const desc = interaction.options.getString("description"),
             d = interaction.options.getString("date");
 
@@ -49,8 +48,6 @@ module.exports = {
                 "The specified date is in the past."
             );
 
-        await interaction.editReply("hi :3");
-
         //let's create the giveaway message first
         const channel = await interaction.guild.channels.fetch(
             process.env.GIVEAWAY_CHANNEL
@@ -60,23 +57,24 @@ module.exports = {
                 "Giveaway channel does not exist"
             );
 
+        const giveaway = new Giveaway({
+            active: true,
+            deadline: date,
+            title: desc,
+        });
         const embed = new EmbedBuilder()
             .setColor(0x7289da)
             .setTitle("Giveaway")
-            .setDescription(
-                `**Description**: ${desc}\n**Ends**: ${time(date)}`
-            );
+            .setDescription(`**Description**: ${desc}\n**Ends**: ${time(date)}`)
+            .setFooter({
+                text: `${giveaway._id}`,
+            });
 
         const msg = await channel.send({
             embeds: [embed],
         });
 
-        const giveaway = new Giveaway({
-            active: true,
-            message: msg.id,
-            deadline: date,
-            title: desc,
-        });
+        giveaway.message = msg.id;
 
         try {
             await giveaway.save();

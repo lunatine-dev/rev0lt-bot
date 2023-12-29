@@ -14,7 +14,7 @@ module.exports = {
         .addNumberOption((option) =>
             option
                 .setName("amount")
-                .setDescription("Amount to set yourself")
+                .setDescription("Amount to set")
                 .setMinValue(0)
                 .setRequired(true)
         ),

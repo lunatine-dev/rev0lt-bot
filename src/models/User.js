@@ -21,10 +21,16 @@ const schema = new mongoose.Schema({
         default: 0,
         min: 0,
     },
+    total_points: {
+        type: Number,
+        default: 0,
+        min: 0,
+    },
     role: {
         type: String,
         default: "user",
     },
+    evidence: [{ type: String }], //array of message ids
 });
 
 module.exports = mongoose.model("User", schema);

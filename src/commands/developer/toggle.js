@@ -17,10 +17,11 @@ module.exports = {
                 .setDescription("Status of giveaway")
                 .setRequired(true)
         ),
+
+    defer: {
+        ephemeral: true,
+    },
     async execute(interaction) {
-        await interaction.deferReply({
-            ephemeral: true,
-        });
         const id = interaction.options.getString("id");
         const status = interaction.options.getBoolean("status");
 

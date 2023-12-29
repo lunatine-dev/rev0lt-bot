@@ -23,8 +23,14 @@ const client = new Client({
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildModeration,
+        GatewayIntentBits.GuildMessageReactions,
     ],
-    partials: [Partials.GuildMember],
+    partials: [
+        Partials.GuildMember,
+        Partials.Message,
+        Partials.Channel,
+        Partials.Reaction,
+    ],
 });
 
 require("./helpers/log")(client);
@@ -60,4 +66,8 @@ cron.schedule("* * * * *", async () => {
     } catch (e) {
         console.error(e);
     }
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+    console.error("Unhandled Rejection at:", promise, "reason:", reason);
 });
