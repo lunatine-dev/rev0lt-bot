@@ -20,7 +20,7 @@ module.exports = {
                 identifier: id,
                 username: interaction.user.username,
                 displayName: interaction.member.displayName,
-                avatar: interaction.user.avatarURL({
+                avatar: interaction.user.displayAvatarURL({
                     size: 256,
                 }),
                 points: 0,
@@ -29,7 +29,7 @@ module.exports = {
             //update their info
             user.username = interaction.user.username;
             user.displayName = interaction.member.displayName;
-            user.avatar = interaction.user.avatarURL({
+            user.avatar = interaction.user.displayAvatarURL({
                 size: 256,
             });
 

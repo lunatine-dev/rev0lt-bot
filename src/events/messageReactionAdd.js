@@ -51,7 +51,7 @@ module.exports = async (client, reaction, reactor) => {
                 displayName: guildMember
                     ? guildMember.displayName
                     : author.displayName,
-                avatar: author.avatarURL({
+                avatar: author.displayAvatarURL({
                     size: 256,
                 }),
                 points: 0,

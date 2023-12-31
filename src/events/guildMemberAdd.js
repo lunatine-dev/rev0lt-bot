@@ -26,7 +26,7 @@ module.exports = async (client, guildMember) => {
         const newUser = new User({
             identifier: id,
             username: username,
-            avatar: guildMember.user.avatarURL({
+            avatar: guildMember.user.displayAvatarURL({
                 size: 256,
             }),
             points: 0,

@@ -40,7 +40,7 @@ module.exports = async (client, interaction) => {
                     user = await new User({
                         identifier: interaction.user.id,
                         username: interaction.user.username,
-                        avatar: interaction.user.avatarURL({
+                        avatar: interaction.user.displayAvatarURL({
                             size: 256,
                         }),
                         points: 0,
@@ -130,7 +130,7 @@ module.exports = async (client, interaction) => {
                     submitter = await new User({
                         identifier: id,
                         username: submitterUser.user.username,
-                        avatar: submitterUser.user.avatarURL({
+                        avatar: submitterUser.user.displayAvatarURL({
                             size: 256,
                         }),
                         points: 0,

@@ -28,7 +28,7 @@ module.exports = {
                     identifier: member.id,
                     username: member.user.username,
                     displayName: member.displayName,
-                    avatar: member.user.avatarURL({
+                    avatar: member.user.displayAvatarURL({
                         size: 256,
                     }),
                     points: 0,
@@ -38,7 +38,7 @@ module.exports = {
                 //update
                 user.username = member.user.username;
                 user.displayName = member.displayName;
-                user.avatar = member.user.avatarURL({
+                user.avatar = member.user.displayAvatarURL({
                     size: 256,
                 });
 
