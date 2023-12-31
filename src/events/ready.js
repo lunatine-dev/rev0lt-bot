@@ -22,13 +22,13 @@ module.exports = async (client) => {
     }
 
     if (missing.length) {
-        client.log(
+        console.log(
             `WARNING: I am missing the following permissions: ${missing.join(
                 ", "
             )}`,
             "red"
         );
     } else {
-        client.log("I have all required permissions");
+        console.log("I have all required permissions");
     }
 };
