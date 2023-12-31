@@ -69,7 +69,7 @@ module.exports = (client) => {
             .setColor(0xff0000)
             .setTitle("Giveaway")
             .setDescription(
-                `**Description**: ${title}\nWinner: ${userMention(
+                `**Description**: ${title}\n**Winner**: ${userMention(
                     winner.identifier
                 )}`
             );
