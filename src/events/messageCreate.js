@@ -22,7 +22,7 @@ module.exports = async (client, message) => {
         }
     }
 
-    const { author, channel, content, attachments } = message;
+    const { author, channel, content, attachments, member } = message;
     if (author.bot) return; //ignore bot messages
     if (channel.id !== process.env.EVIDENCE_CHANNEL) return; //ignore messages not in evidence channel
 
@@ -38,13 +38,12 @@ module.exports = async (client, message) => {
     try {
         await message.react("1191040478611767366");
 
-        const { album, images } = await client.uploadToImgurAlbum(
+        const { album, images } = await client.uploadToServer(
+            author,
+            member,
             `Evidence for: @${author.username}`,
             imageAttachments
         );
-
-        //since in guild, we have access to .member
-        const member = message.member;
 
         let fields = [
             {
@@ -78,7 +77,7 @@ module.exports = async (client, message) => {
                         attachments.size === 1 ? "" : "s"
                     } attached, view ${
                         attachments.size === 1 ? "it" : "them"
-                    } here: <${album}>`,
+                    } by clicking [here](${album})`,
                 },
             ];
         }
@@ -115,5 +114,6 @@ module.exports = async (client, message) => {
         await message.delete();
     } catch (e) {
         console.error(e);
+        await message.react("⁉");
     }
 };
