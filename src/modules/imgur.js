@@ -32,6 +32,9 @@ module.exports = (client) => {
             }
 
             return { album: `https://imgur.com/a/${albumId}`, images };
-        } else return { album: false, images: [] };
+        } else {
+            console.log(res);
+            return { album: false, images: [] };
+        }
     };
 };
