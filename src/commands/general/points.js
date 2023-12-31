@@ -1,5 +1,5 @@
 const User = require("../../models/User");
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -38,6 +38,25 @@ module.exports = {
 
         let points = user.points || 0;
 
-        await interaction.editReply(`You currently have \`${points}\` points`);
+        const embed = new EmbedBuilder()
+            .setDescription(
+                "Your **current** points will be reset if you win a giveaway, if you don't win they'll be kept for the next giveaway."
+            )
+            .addFields(
+                {
+                    name: "Current",
+                    value: points.toString(),
+                    inline: true,
+                },
+                {
+                    name: "Total",
+                    value: user.total_points.toString(),
+                    inline: true,
+                }
+            );
+
+        await interaction.editReply({
+            embeds: [embed],
+        });
     },
 };
