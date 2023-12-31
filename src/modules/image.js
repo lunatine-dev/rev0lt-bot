@@ -54,7 +54,7 @@ module.exports = (client) => {
             //success
 
             const images = response.data.map(
-                (imgPath) => `${process.env.BACKEND_URL}${imgPath}`
+                (imgPath) => `https://rev0ltapi.astatine.moe${imgPath}`
             );
 
             let user = await User.findOne({
