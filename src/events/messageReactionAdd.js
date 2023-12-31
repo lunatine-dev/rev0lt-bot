@@ -4,6 +4,8 @@ const addPoint = "✅";
 const removePoint = "❌";
 
 module.exports = async (client, reaction, reactor) => {
+    return; //legacy code
+
     if (reaction.partial) {
         // If the message this reaction belongs to was removed, the fetching might result in an API error which should be handled
         try {
@@ -24,6 +26,8 @@ module.exports = async (client, reaction, reactor) => {
         emoji,
         message: { channel, guild, id, author },
     } = reaction;
+
+    if (author.bot) return; //ignore bots reactions
 
     if (channel.id !== process.env.EVIDENCE_CHANNEL) return;
 
