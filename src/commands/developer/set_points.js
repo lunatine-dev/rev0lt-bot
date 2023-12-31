@@ -32,6 +32,7 @@ module.exports = {
             {
                 $set: {
                     points: amount,
+                    total_points: amount,
                 },
             }
         );
