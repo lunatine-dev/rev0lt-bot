@@ -22,6 +22,11 @@ module.exports = async (client, interaction) => {
             });
 
         try {
+            if (command.defer) {
+                await interaction.deferReply({
+                    ephemeral: command.defer?.ephemeral,
+                });
+            }
             //database field
             if (command.hasField) {
                 let { key, value } = command.hasField;
@@ -31,6 +36,12 @@ module.exports = async (client, interaction) => {
                         content: "Permission error",
                         ephemeral: true,
                     });
+
+                if (!command.defer) {
+                    await interaction.deferReply({
+                        ephemeral: true,
+                    });
+                }
 
                 let user = await User.findOne({
                     identifier: interaction.user.id,
@@ -48,7 +59,7 @@ module.exports = async (client, interaction) => {
                 }
 
                 if (!user[key] || user[key] !== value)
-                    return interaction.reply({
+                    return interaction.editReply({
                         content:
                             "You do not have permission to run this command",
                         ephemeral: true,
@@ -62,12 +73,6 @@ module.exports = async (client, interaction) => {
                             "This command is only available to developers.",
                         ephemeral: true,
                     });
-            }
-
-            if (command.defer) {
-                await interaction.deferReply({
-                    ephemeral: command.defer?.ephemeral,
-                });
             }
 
             await command.execute(interaction);

@@ -70,6 +70,13 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("help")
         .setDescription("Get help with dates"),
+    hasField: {
+        key: "role",
+        value: "admin",
+    },
+    defer: {
+        ephemeral: true,
+    },
     async execute(interaction) {
         let i = 0;
         let fields = help.map((item) => {
@@ -85,7 +92,7 @@ module.exports = {
 
         const embed = new EmbedBuilder().addFields(fields);
 
-        await interaction.reply({
+        await interaction.editReply({
             embeds: [embed],
             ephemeral: true,
         });
