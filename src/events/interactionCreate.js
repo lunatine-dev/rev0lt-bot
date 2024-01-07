@@ -3,9 +3,11 @@ const {
     userMention,
     ActionRowBuilder,
     ButtonBuilder,
+    time,
     ButtonStyle,
 } = require("discord.js");
 
+const Post = require("../models/Post");
 const addPoint = "✅";
 const removePoint = "❌";
 
@@ -221,6 +223,31 @@ module.exports = async (client, interaction) => {
                 console.error(e);
                 await interaction.editReply("There was an error doing that");
             }
+        }
+    } else if (interaction.isModalSubmit()) {
+        let cid = interaction.customId;
+
+        if (cid === "schedule_post") {
+            const deadline = interaction.fields.getTextInputValue("deadline");
+            const message = interaction.fields.getTextInputValue("message");
+            const channelId = interaction.client.schemaPostChannelId;
+
+            const date = interaction.client.parseDate(deadline);
+
+            const currentDate = new Date();
+            if (date < currentDate)
+                return await interaction.reply("Invalid date");
+            const post = new Post({
+                message,
+                deadline: date,
+                channel: channelId,
+            });
+
+            await post.save();
+
+            await interaction.reply({
+                content: "Post scheduled for " + time(date),
+            });
         }
     }
 };

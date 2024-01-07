@@ -66,6 +66,16 @@ cron.schedule("* * * * *", async () => {
     } catch (e) {
         console.error(e);
     }
+
+    try {
+        const expiredPosts = await client.getExpiredPosts();
+
+        for (const post of expiredPosts) {
+            await client.processPost(post);
+        }
+    } catch (e) {
+        console.error(e);
+    }
 });
 
 process.on("unhandledRejection", (reason, promise) => {
