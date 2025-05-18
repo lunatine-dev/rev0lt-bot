@@ -1,4 +1,4 @@
-# Rev0lt Discord Bot!
+# Rev0lt Discord Bot!!
 
 Welcome to the official repository for the Rev0lt Discord bot. This bot is designed to manage clan events, giveaways, and citadel tracking for your Discord server.
 
